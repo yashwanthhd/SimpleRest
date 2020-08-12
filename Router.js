@@ -4,13 +4,13 @@ const userModel = require('./model/Model')
 const app = express();
 
 app.get('/', async (req, res) => {
-    return res.send('Hello World Default route!!!');
+    res.send('Hello World Default route!!!');
 });
 
 
 app.get('/users', async(req, res) => {
     const users = await userModel.find({})
-    return res.status(200).send(users);
+    res.status(200).send(users);
 });
 
 app.post('/user', async(req,res) => {
@@ -19,7 +19,7 @@ app.post('/user', async(req,res) => {
         await user.save()
         res.status(200).send(user)
     } catch(error) {
-        return res.status(500).send(error)
+        res.status(500).send(error)
     }
 })
 
@@ -28,7 +28,7 @@ app.delete('/user/:id', async (req, res) => {
         const user = await userModel.findByIdAndDelete(req.params.id)
         res.status(200).send(user)
     } catch (error) {
-        return res.status(500).send(error)
+        res.status(500).send(error)
     }
 })
 
@@ -38,7 +38,7 @@ app.patch('/user/:id', async (req, res) => {
         userModel.save()
         res.status(200).send(user)
     } catch (error) {
-        return res.status(500).send(error)
+        res.status(500).send(error)
     }
 })
 
